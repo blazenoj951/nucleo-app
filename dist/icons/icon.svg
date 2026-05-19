@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="112" fill="#1B2C3A"/>
+  <!-- Outer glow ring -->
+  <circle cx="256" cy="256" r="220" fill="none" stroke="#C9A84C" stroke-width="6" opacity="0.3"/>
+  
+  <!-- Lords Brigade Celtic Knot Cross (scaled to fit icon) -->
+  <!-- Main Celtic knot body outline -->
+  <path d="M256 52 C305 52,370 88,375 148 C428 134,472 174,466 230 C472 284,430 328,377 320 C382 388,344 428,296 432 C283 470,256 494,256 494 C256 494,229 470,216 432 C168 428,130 388,135 320 C82 328,40 284,46 230 C40 174,84 134,137 148 C142 88,207 52,256 52Z" fill="none" stroke="#C9A84C" stroke-width="10" opacity="0.4"/>
+
+  <!-- Horizontal band (knotwork) -->
+  <rect x="106" y="214" width="300" height="62" rx="14" fill="#C9A84C"/>
+  <!-- Vertical band (knotwork) -->
+  <rect x="227" y="92" width="62" height="300" rx="14" fill="#C9A84C"/>
+
+  <!-- Cross cutouts (white negative space) -->
+  <!-- Left of cross -->
+  <rect x="118" y="228" width="95" height="34" rx="6" fill="#1B2C3A"/>
+  <!-- Right of cross -->
+  <rect x="299" y="228" width="95" height="34" rx="6" fill="#1B2C3A"/>
+  <!-- Above cross -->
+  <rect x="241" y="104" width="34" height="95" rx="6" fill="#1B2C3A"/>
+  <!-- Below cross -->
+  <rect x="241" y="303" width="34" height="95" rx="6" fill="#1B2C3A"/>
+
+  <!-- Diagonal weave lines -->
+  <line x1="168" y1="170" x2="225" y2="227" stroke="#1B2C3A" stroke-width="9" stroke-linecap="round"/>
+  <line x1="287" y1="170" x2="344" y2="227" stroke="#1B2C3A" stroke-width="9" stroke-linecap="round"/>
+  <line x1="168" y1="342" x2="225" y2="285" stroke="#1B2C3A" stroke-width="9" stroke-linecap="round"/>
+  <line x1="287" y1="342" x2="344" y2="285" stroke="#1B2C3A" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- Heart shape at bottom -->
+  <path d="M256 478 C248 464,198 438,192 410 C186 384,202 368,222 374 C234 378,248 392,256 404 C264 392,278 378,290 374 C310 368,326 384,320 410 C314 438,264 464,256 478Z" fill="#C9A84C"/>
+
+  <!-- Top circle accent -->
+  <circle cx="256" cy="60" r="16" fill="#E8C96A"/>
+  <!-- Side accents -->
+  <circle cx="432" cy="230" r="13" fill="#C9A84C" opacity="0.8"/>
+  <circle cx="80" cy="230" r="13" fill="#C9A84C" opacity="0.8"/>
+
+  <!-- Subtle inner glow dots at corners -->
+  <circle cx="180" cy="150" r="6" fill="#E8C96A" opacity="0.5"/>
+  <circle cx="332" cy="150" r="6" fill="#E8C96A" opacity="0.5"/>
+  <circle cx="180" cy="340" r="6" fill="#E8C96A" opacity="0.5"/>
+  <circle cx="332" cy="340" r="6" fill="#E8C96A" opacity="0.5"/>
+</svg>
