@@ -89,6 +89,7 @@ function NavIcon({ id, active, color, muted }) {
     case "notes": return <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M14 3H6C4.9 3 4 3.9 4 5V19C4 20.1 4.9 21 6 21H18C19.1 21 20 20.1 20 19V9L14 3Z" stroke={c} strokeWidth="1.85" strokeLinejoin="round"/><path d="M14 3V9H20M8 13H16M8 17H13" stroke={c} strokeWidth="1.75" strokeLinecap="round"/></svg>;
     case "media": return <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke={c} strokeWidth="1.85"/><circle cx="12" cy="12" r="3" stroke={c} strokeWidth="1.8"/><path d="M12 3V9M12 15V21M3 12H9M15 12H21" stroke={c} strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/></svg>;
     case "find": return <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke={c} strokeWidth="1.85"/><path d="M16.5 16.5L21 21" stroke={c} strokeWidth="2.1" strokeLinecap="round"/></svg>;
+    case "apparel": return <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M20.38 3.46L16 2L15 4.5L12 7L9 4.5L8 2L3.62 3.46L2 9L5 10V21H19V10L22 9L20.38 3.46Z" fill={active?c+"33":"none"} stroke={c} strokeWidth="1.85" strokeLinejoin="round"/></svg>;
     case "give": return <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 21C12 21 3 15.5 3 9.5C3 7 5 5 7.5 5C9.24 5 10.91 6 12 7.5C13.09 6 14.76 5 16.5 5C19 5 21 7 21 9.5C21 15.5 12 21 12 21Z" fill={active?c+"33":"none"} stroke={c} strokeWidth="1.85" strokeLinejoin="round"/><path d="M12 10V14M10 12H14" stroke={c} strokeWidth="1.8" strokeLinecap="round"/></svg>;
     default: return null;
   }
@@ -96,8 +97,19 @@ function NavIcon({ id, active, color, muted }) {
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 const BIBLE_VERSIONS = {
-  en:["NIV","NLT","NIV-BST","Celebrate Recovery","ESV","KJV","Ethiopian/Apocrypha"],
+  en:["NIV","NLT","ESV","KJV","NIV-BST","Celebrate Recovery","Recovery (LSM)","Ethiopian/Apocrypha"],
   es:["RVR60","NVI","LBLA","RVA","DHH","TLA","PDT"],
+};
+
+const VERSION_DESC = {
+  "NIV":"New International Version — clear modern English, ideal for everyday study and reading.",
+  "NLT":"New Living Translation — easy-to-understand, great for devotional reading.",
+  "ESV":"English Standard Version — word-for-word accuracy, excellent for deep study.",
+  "KJV":"King James Version — classic 1611 translation with timeless literary beauty.",
+  "NIV-BST":"Bible Speaks Today — NIV text with in-depth commentary and cultural context.",
+  "Celebrate Recovery":"CR Study Bible — NIV text with 8 recovery principles based on the Beatitudes.",
+  "Recovery (LSM)":"Recovery Version (Living Stream Ministry) — features thousands of detailed footnotes by Watchman Nee & Witness Lee focused on the divine life and experience of Christ.",
+  "Ethiopian/Apocrypha":"Ethiopian/Apocrypha — includes the deuterocanonical books and Ethiopian Orthodox canon.",
 };
 const SAMPLE_VERSES = {
   "John 3:16":{
@@ -197,6 +209,14 @@ function HomeTab({T,bibleVersion,projects,connectedChurch,setActiveTab}){
       <button onClick={()=>window.open("https://wa.me/?text=Join+our+Núcleo+Bible+study!","_blank")} style={{flex:1,padding:"12px",borderRadius:12,border:"none",background:"linear-gradient(135deg,#25D366,#128C7E)",color:"#fff",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"sans-serif"}}>💬 WhatsApp</button>
       <button onClick={()=>window.open("mailto:?subject=Nucleo Bible Study Invite","_blank")} style={{flex:1,padding:"12px",borderRadius:12,border:"none",background:T.btnBg,color:T.btnTxt,fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"sans-serif"}}>📧 Email Group</button>
     </div>
+    <GCard T={T} gold style={{marginTop:12,display:"flex",alignItems:"flex-start",gap:11}}>
+      <div style={{fontSize:26,flexShrink:0}}>📲</div>
+      <div style={{flex:1}}>
+        <div style={{fontSize:12,color:T.gold,fontWeight:700,fontFamily:"sans-serif",marginBottom:4}}>Install Núcleo on your phone</div>
+        <div style={{fontSize:10,color:T.textMuted,fontFamily:"sans-serif",lineHeight:1.65}}><span style={{color:T.text,fontWeight:600}}>iPhone:</span> Open in Safari → Share ⎙ → "Add to Home Screen"<br/><span style={{color:T.text,fontWeight:600}}>Android:</span> Open in Chrome → Menu ⋮ → "Add to Home Screen"</div>
+        <div style={{marginTop:5,fontSize:9,color:T.gold,fontFamily:"sans-serif",letterSpacing:"0.08em"}}>WORKS OFFLINE · NO APP STORE NEEDED · FREE</div>
+      </div>
+    </GCard>
   </div>);
 }
 
@@ -214,6 +234,12 @@ function BibleTab({T,language,setLanguage,bibleVersion,setBibleVersion,highlight
       </div>
       <div style={{fontSize:9,color:T.textMuted,fontFamily:"sans-serif",marginBottom:6,letterSpacing:"0.1em"}}>VERSION / VERSIÓN</div>
       <div style={{display:"flex",flexWrap:"wrap",gap:6}}>{vList.map(v=><Pill key={v} T={T} small active={bibleVersion===v} onClick={()=>setBibleVersion(v)}>{v}</Pill>)}</div>
+      {VERSION_DESC[bibleVersion]&&(
+        <div style={{marginTop:10,background:T.inputBg,border:`1px solid ${T.borderGoldFaint}`,borderRadius:9,padding:"8px 12px",fontSize:10,color:T.textMuted,fontFamily:"sans-serif",lineHeight:1.55}}>
+          <span style={{color:T.gold,fontWeight:700}}>{bibleVersion}</span> — {VERSION_DESC[bibleVersion]}
+          {bibleVersion==="Recovery (LSM)"&&<span> <a href="https://www.livingstream.com" target="_blank" rel="noreferrer" style={{color:T.gold}}>livingstream.com →</a></span>}
+        </div>
+      )}
     </GCard>
     <GCard T={T} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"12px 14px"}}>
       <div><div style={{fontSize:17,color:T.text,fontWeight:700,fontFamily:"sans-serif"}}>{selBook} 3</div><div style={{fontSize:10,color:T.textMuted,fontFamily:"sans-serif"}}>{bibleVersion} · {language==="en"?"English":"Español"}</div></div>
@@ -662,6 +688,65 @@ function GenerosityTab({T, connectedChurch}){
   );
 }
 
+// ─── APPAREL TAB ─────────────────────────────────────────────────────────────
+const MIRAKLE_PRODUCTS = [
+  {name:"Unisex Blessed T-shirt",price:"$24.99",img:"https://miraklewear.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-06-at-10.49.08-PM-scaled.jpeg",url:"https://miraklewear.com/product/unisex-blessed-t-shirt/",emoji:"🙏"},
+  {name:"Unisex Faith T-shirt",price:"$24.99",img:"https://miraklewear.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-06-at-10.46.49-PM-scaled.jpeg",url:"https://miraklewear.com/product/unisex-faith-t-shirt/",emoji:"✝️"},
+  {name:"Unisex TRUST GOD T-shirt",price:"$24.99",img:"https://miraklewear.com/wp-content/uploads/2026/02/4-1.jpeg",url:"https://miraklewear.com/product/unisex-trust-god-t-shirt/",emoji:"🦅"},
+  {name:"Unisex JESUS T-shirt",price:"$24.99",img:"https://miraklewear.com/wp-content/uploads/2026/02/image-29.png",url:"https://miraklewear.com/product/unisex-jesus-t-shirt/",emoji:"✝️"},
+];
+
+function ApparelTab({T}){
+  const [imgErr,setImgErr]=useState({});
+  return(
+    <div>
+      {/* Hero */}
+      <div style={{background:`linear-gradient(145deg,${T.bgCard2},${T.bgDeep})`,border:`1px solid ${T.borderGold}`,borderRadius:20,padding:"20px 18px",marginBottom:14,position:"relative",overflow:"hidden",boxShadow:`0 8px 32px ${T.shadow},inset 0 1px 0 ${T.gold}22`}}>
+        <div style={{position:"absolute",top:0,left:18,right:18,height:1,background:`linear-gradient(90deg,transparent,${T.gold}88,transparent)`}}/>
+        <div style={{fontSize:11,color:T.gold,fontFamily:"sans-serif",fontWeight:700,letterSpacing:"0.12em",marginBottom:6}}>FAITH · FASHION · MISSION</div>
+        <div style={{fontSize:18,color:T.text,fontWeight:700,fontFamily:"Georgia,serif",marginBottom:6}}>Mirakle Wear</div>
+        <div style={{fontSize:11,color:T.textMuted,fontFamily:"sans-serif",lineHeight:1.6,marginBottom:13}}>Faith-inspired apparel with purpose. A portion of every purchase supports breast cancer research and support organizations.</div>
+        <button onClick={()=>window.open("https://miraklewear.com/shop","_blank")} style={{width:"100%",padding:"11px",borderRadius:11,border:"none",background:T.btnBg,color:T.btnTxt,fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"sans-serif",boxShadow:`0 4px 14px ${T.shadowGold}`}}>Shop Full Collection →</button>
+      </div>
+
+      {/* Products */}
+      <SL T={T}>Featured Items</SL>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:11,marginBottom:14}}>
+        {MIRAKLE_PRODUCTS.map(p=>(
+          <div key={p.name} onClick={()=>window.open(p.url,"_blank")} style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:14,overflow:"hidden",cursor:"pointer",boxShadow:`0 2px 10px ${T.shadow}`,transition:"transform 0.15s"}}
+            onMouseEnter={e=>e.currentTarget.style.transform="scale(0.98)"}
+            onMouseLeave={e=>e.currentTarget.style.transform="none"}>
+            {!imgErr[p.name]
+              ? <img src={p.img} alt={p.name} onError={()=>setImgErr(prev=>({...prev,[p.name]:true}))} style={{width:"100%",aspectRatio:"1",objectFit:"cover",display:"block",background:T.textFaint}} loading="lazy"/>
+              : <div style={{width:"100%",aspectRatio:"1",display:"flex",alignItems:"center",justifyContent:"center",background:`linear-gradient(135deg,${T.bgCard2},${T.textFaint})`,fontSize:40}}>{p.emoji}</div>
+            }
+            <div style={{padding:"10px 11px 12px"}}>
+              <div style={{fontSize:11,color:T.text,fontFamily:"sans-serif",fontWeight:600,marginBottom:3,lineHeight:1.3}}>{p.name}</div>
+              <div style={{fontSize:14,color:T.gold,fontFamily:"sans-serif",fontWeight:700,marginBottom:7}}>{p.price}</div>
+              <button onClick={e=>{e.stopPropagation();window.open(p.url,"_blank");}} style={{width:"100%",background:T.btnBg,color:T.btnTxt,border:"none",borderRadius:8,padding:"7px",fontSize:11,fontWeight:700,cursor:"pointer",fontFamily:"sans-serif"}}>Select Options</button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Custom orders */}
+      <GCard T={T} gold>
+        <div style={{fontSize:22,marginBottom:7}}>🎨</div>
+        <div style={{fontSize:14,color:T.gold,fontWeight:700,fontFamily:"sans-serif",marginBottom:5}}>Custom Group Orders</div>
+        <div style={{fontSize:11,color:T.text,fontFamily:"sans-serif",lineHeight:1.6,marginBottom:12}}>Design custom tees, hoodies, and branded items for your group. Screen printing, embroidery, and DTF printing. Fast turnaround, transparent pricing, free shipping.</div>
+        <div style={{display:"flex",gap:8}}>
+          <button onClick={()=>window.open("https://miraklewear.com/contact-us/","_blank")} style={{flex:1,padding:"11px",borderRadius:10,border:"none",background:T.btnBg,color:T.btnTxt,fontSize:12,fontWeight:700,cursor:"pointer",fontFamily:"sans-serif"}}>Get a Quote</button>
+          <button onClick={()=>window.open("mailto:Sales@miraklewear.com","_blank")} style={{flex:1,padding:"11px",borderRadius:10,background:"transparent",border:`1px solid ${T.borderGold}`,color:T.gold,fontSize:12,cursor:"pointer",fontFamily:"sans-serif"}}>📧 Email</button>
+        </div>
+      </GCard>
+
+      <div style={{textAlign:"center",padding:"10px 8px 4px"}}>
+        <div style={{fontSize:10,color:T.textMuted,fontFamily:"sans-serif",lineHeight:1.6}}>💗 A portion of every purchase supports<br/>breast cancer research and support organizations.</div>
+      </div>
+    </div>
+  );
+}
+
 // ─── SETTINGS DRAWER ──────────────────────────────────────────────────────────
 function SettingsDrawer({T,themeMode,setTheme,language,setLanguage,bibleVersion,setBibleVersion,activeProfile,setActiveProfile,onClose}){
   return(<div style={{position:"fixed",top:0,left:"50%",transform:"translateX(-50%)",width:"100%",maxWidth:430,height:"100vh",background:T.bgDeep,zIndex:200,overflowY:"auto",padding:"20px 16px",boxSizing:"border-box"}}>
@@ -705,6 +790,8 @@ export default function Nucleo(){
   const [drawerOpen,setDrawerOpen]=useState(false);
   const [showNoteForm,setShowNoteForm]=useState(false);
   const [showProjectForm,setShowProjectForm]=useState(false);
+  const navRef=useRef(null);
+  const [navDotIdx,setNavDotIdx]=useState(0);
 
   useEffect(()=>save("tab",activeTab),[activeTab]);
   useEffect(()=>save("language",language),[language]);
@@ -717,7 +804,7 @@ export default function Nucleo(){
   useEffect(()=>save("projects",projects),[projects]);
   useEffect(()=>save("notes",notes),[notes]);
 
-  const NAV=[{id:"home",label:"Home"},{id:"bible",label:"Bible"},{id:"groups",label:"Groups"},{id:"calendar",label:"Cal"},{id:"notes",label:"Notes"},{id:"media",label:"Media"},{id:"find",label:"Find"},{id:"give",label:"Give"}];
+  const NAV=[{id:"home",label:"Home"},{id:"bible",label:"Bible"},{id:"groups",label:"Groups"},{id:"calendar",label:"Cal"},{id:"notes",label:"Notes"},{id:"media",label:"Media"},{id:"apparel",label:"Apparel"},{id:"find",label:"Find"},{id:"give",label:"Give"}];
   const tp={T,language,setLanguage,bibleVersion,setBibleVersion,highlights,setHighlights,bookmarks,setBookmarks,activeGroup,setActiveGroup,activeProfile,setActiveProfile,connectedChurch,setConnectedChurch,projects,setProjects,notes,setNotes,calendarDate,setCalendarDate,showNoteForm,setShowNoteForm,showProjectForm,setShowProjectForm,setActiveTab};
 
   return(
@@ -740,33 +827,49 @@ export default function Nucleo(){
       {drawerOpen&&<SettingsDrawer {...tp} themeMode={themeMode} setTheme={setTheme} onClose={()=>setDrawerOpen(false)}/>}
 
       {/* CONTENT */}
-      <div style={{padding:"14px 14px 88px"}}>
+      <div style={{padding:"14px 14px 100px"}}>
         {activeTab==="home"&&<HomeTab {...tp}/>}
         {activeTab==="bible"&&<BibleTab {...tp}/>}
         {activeTab==="groups"&&<GroupsTab {...tp}/>}
         {activeTab==="calendar"&&<CalendarTab {...tp}/>}
         {activeTab==="notes"&&<NotesTab {...tp}/>}
         {activeTab==="media"&&<MediaTab {...tp}/>}
+        {activeTab==="apparel"&&<ApparelTab {...tp}/>}
         {activeTab==="find"&&<FindTab {...tp}/>}
         {activeTab==="give"&&<GenerosityTab {...tp}/>}
       </div>
 
-      {/* BOTTOM NAV */}
-      <nav style={{display:"flex",background:T.navBg,borderTop:`1px solid ${T.border}`,position:"fixed",bottom:0,left:"50%",transform:"translateX(-50%)",width:"100%",maxWidth:430,zIndex:100,boxShadow:`0 -1px 0 ${T.gold}14,0 -8px 32px ${T.shadow}`,padding:"5px 0 max(16px,env(safe-area-inset-bottom))"}}>
-        {NAV.map(item=>{
-          const active=activeTab===item.id;
-          return(
-            <div key={item.id} onClick={()=>setActiveTab(item.id)} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",paddingTop:9,cursor:"pointer",position:"relative"}}>
-              {active&&<div style={{position:"absolute",top:0,left:"15%",right:"15%",height:2,background:`linear-gradient(90deg,transparent,${T.gold},transparent)`,borderRadius:1}}/>}
-              {active&&<div style={{position:"absolute",top:5,width:40,height:40,borderRadius:12,background:`${T.gold}14`,boxShadow:`0 0 16px ${T.gold}28`}}/>}
-              <div style={{position:"relative",transform:active?"translateY(-1px)":"none",transition:"transform 0.2s"}}>
-                <NavIcon id={item.id} active={active} color={T.gold} muted={T.textMuted}/>
+      {/* BOTTOM NAV — SWIPEABLE */}
+      <div style={{background:T.navBg,borderTop:`1px solid ${T.border}`,position:"fixed",bottom:0,left:"50%",transform:"translateX(-50%)",width:"100%",maxWidth:430,zIndex:100,boxShadow:`0 -1px 0 ${T.gold}14,0 -8px 32px ${T.shadow}`}}>
+        <div style={{display:"flex",overflowX:"auto",scrollbarWidth:"none",WebkitOverflowScrolling:"touch",padding:"5px 4px 0",gap:0}}
+          ref={navRef}
+          onScroll={()=>{
+            if(!navRef.current) return;
+            const el=navRef.current;
+            const pct=el.scrollLeft/(el.scrollWidth-el.clientWidth||1);
+            setNavDotIdx(Math.round(pct*(Math.ceil(NAV.length/4)-1)));
+          }}>
+          {NAV.map(item=>{
+            const active=activeTab===item.id;
+            return(
+              <div key={item.id} onClick={()=>{setActiveTab(item.id);setTimeout(()=>{if(navRef.current){const el=navRef.current;const navItem=el.querySelector(`[data-id="${item.id}"]`);if(navItem){const left=navItem.offsetLeft-el.clientWidth/2+navItem.offsetWidth/2;el.scrollTo({left,behavior:"smooth"});}}},50);}} data-id={item.id} style={{flex:"0 0 auto",minWidth:60,display:"flex",flexDirection:"column",alignItems:"center",paddingTop:9,paddingBottom:4,cursor:"pointer",position:"relative"}}>
+                {active&&<div style={{position:"absolute",top:0,left:"15%",right:"15%",height:2,background:`linear-gradient(90deg,transparent,${T.gold},transparent)`,borderRadius:1}}/>}
+                {active&&<div style={{position:"absolute",top:5,width:38,height:38,borderRadius:11,background:`${T.gold}14`,boxShadow:`0 0 14px ${T.gold}28`}}/>}
+                <div style={{position:"relative",transform:active?"translateY(-1px)":"none",transition:"transform 0.2s"}}>
+                  <NavIcon id={item.id} active={active} color={T.gold} muted={T.textMuted}/>
+                </div>
+                <div style={{fontSize:9,fontFamily:"sans-serif",fontWeight:active?700:400,color:active?T.gold:T.textMuted,marginTop:3,letterSpacing:"0.02em",whiteSpace:"nowrap",transition:"color 0.2s"}}>{item.label}</div>
               </div>
-              <div style={{fontSize:9.5,fontFamily:"sans-serif",fontWeight:active?700:400,color:active?T.gold:T.textMuted,marginTop:3,letterSpacing:"0.02em",transition:"color 0.2s"}}>{item.label}</div>
-            </div>
-          );
-        })}
-      </nav>
+            );
+          })}
+        </div>
+        {/* Scroll indicator dots */}
+        <div style={{display:"flex",justifyContent:"center",gap:4,paddingBottom:`max(12px,env(safe-area-inset-bottom))`,paddingTop:3}}>
+          {Array.from({length:Math.ceil(NAV.length/4)},(_,i)=>(
+            <div key={i} style={{width:4,height:4,borderRadius:"50%",background:navDotIdx===i?T.gold:T.textFaint,transition:"background 0.2s"}}/>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
