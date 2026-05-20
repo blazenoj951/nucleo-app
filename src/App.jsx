@@ -20,24 +20,24 @@ const THEMES = {
   },
   light: {
     id:"light",
-    bg:"#FAF7F0", bgDeep:"#F0EAD8", bgCard:"rgba(255,255,255,0.97)", bgCard2:"rgba(245,240,232,0.98)",
-    text:"#1B2C3A", textMuted:"#5A6F80", textFaint:"#D8CEBC",
-    gold:"#8B5E10", goldLight:"#A07830", goldDim:"#6A3C08",
-    earth:"#7A5230",
-    border:"rgba(200,188,168,0.8)", borderGold:"rgba(139,94,16,0.45)", borderGoldFaint:"rgba(139,94,16,0.22)",
-    highlight:"rgba(139,94,16,0.08)",
-    pillActive:"#8B5E10", pillActiveTxt:"#FAF7F0",
-    pillInactive:"rgba(139,94,16,0.10)", pillInactiveTxt:"#8B5E10",
-    btnBg:"linear-gradient(135deg,#8B5E10,#6A3C08)", btnTxt:"#FAF7F0",
-    navBg:"rgba(240,234,216,0.98)", inputBg:"rgba(245,240,228,0.9)",
-    groupMen:"#1A5EA0", groupWomen:"#A03068", groupCouples:"#8B5E10",
-    shadow:"rgba(0,0,0,0.13)", shadowGold:"rgba(139,94,16,0.18)",
-    glow:"drop-shadow(0 0 5px rgba(139,94,16,0.6))",
+    bg:"#F2F3F7", bgDeep:"#E8EAEF", bgCard:"rgba(255,255,255,0.97)", bgCard2:"rgba(242,243,247,0.98)",
+    text:"#1E2235", textMuted:"#6B7280", textFaint:"#D1D5DB",
+    gold:"#7C5C10", goldLight:"#A07828", goldDim:"#5A3E08",
+    earth:"#6B7280",
+    border:"rgba(203,213,225,0.9)", borderGold:"rgba(124,92,16,0.45)", borderGoldFaint:"rgba(124,92,16,0.22)",
+    highlight:"rgba(124,92,16,0.08)",
+    pillActive:"#7C5C10", pillActiveTxt:"#F2F3F7",
+    pillInactive:"rgba(124,92,16,0.10)", pillInactiveTxt:"#7C5C10",
+    btnBg:"linear-gradient(135deg,#7C5C10,#5A3E08)", btnTxt:"#FFFFFF",
+    navBg:"rgba(232,234,239,0.98)", inputBg:"rgba(229,231,235,0.9)",
+    groupMen:"#1A5EA0", groupWomen:"#A03068", groupCouples:"#7C5C10",
+    shadow:"rgba(0,0,0,0.12)", shadowGold:"rgba(124,92,16,0.18)",
+    glow:"drop-shadow(0 0 5px rgba(124,92,16,0.55))",
   },
   earth: {
     id:"earth",
     bg:"#1C1008", bgDeep:"#140A04", bgCard:"rgba(45,28,14,0.95)", bgCard2:"rgba(58,36,18,0.96)",
-    text:"#F5E8CE", textMuted:"#A08058", textFaint:"#4A3018",
+    text:"#F8EDD0", textMuted:"#B08858", textFaint:"#4A3018",
     gold:"#D4A853", goldLight:"#EAC878", goldDim:"#A07028",
     earth:"#C08040",
     border:"rgba(74,48,24,1)", borderGold:"rgba(212,168,83,0.45)", borderGoldFaint:"rgba(212,168,83,0.22)",
@@ -388,19 +388,106 @@ function NotesTab({T,notes,setNotes,showNoteForm,setShowNoteForm}){
 }
 
 // ─── MEDIA ────────────────────────────────────────────────────────────────────
+const BOOKS_VERTICAL = [
+  {title:"Mere Christianity",author:"C.S. Lewis",genre:"Faith",emoji:"📖",bg:"linear-gradient(135deg,#2D4A3E,#1a3a2e)",asin:"0060652926"},
+  {title:"The Purpose Driven Life",author:"Rick Warren",genre:"Purpose",emoji:"🕊️",bg:"linear-gradient(135deg,#3D2B1F,#5C3D2E)",asin:"0310337507"},
+  {title:"Boundaries",author:"Henry Cloud",genre:"Leadership",emoji:"📚",bg:"linear-gradient(135deg,#2B3A4D,#1E2D40)",asin:"0060916745"},
+  {title:"Every Man's Battle",author:"S. Arterburn",genre:"Men's",emoji:"⚔️",bg:"linear-gradient(135deg,#4D2B1F,#3D1A10)",asin:"1578560004"},
+  {title:"Captivating",author:"J. & S. Eldredge",genre:"Women's",emoji:"🌸",bg:"linear-gradient(135deg,#4D2B3D,#3D1A2E)",asin:"0785261567"},
+  {title:"The Love Dare",author:"Kendrick Brothers",genre:"Couples",emoji:"💑",bg:"linear-gradient(135deg,#2B4D3D,#1A3D2E)",asin:"0805430520"},
+  {title:"Wild at Heart",author:"John Eldredge",genre:"Men's",emoji:"🦅",bg:"linear-gradient(135deg,#3D3D1F,#2D2D10)",asin:"1400280303"},
+  {title:"The 5 Love Languages",author:"Gary Chapman",genre:"Couples",emoji:"💕",bg:"linear-gradient(135deg,#4D1F3D,#3D102E)",asin:"0802412955"},
+];
+const PLAYLISTS = [
+  {title:"Hillsong Worship Essentials",artist:"Hillsong Church",emoji:"🎵",bg:"linear-gradient(135deg,#1a1a2e,#16213e)",apple:"https://music.apple.com/us/playlist/hillsong-worship-essentials/pl.7be0e5ca2be24f14b94f3c6254e6c05c",spotify:"https://open.spotify.com/playlist/37i9dQZF1DXcit2LZJMtBR"},
+  {title:"Elevation Worship Best",artist:"Elevation Church",emoji:"🙏",bg:"linear-gradient(135deg,#0d1b2a,#1b3a4b)",apple:"https://music.apple.com",spotify:"https://open.spotify.com/artist/6Y0P2VEeGPIeTSmcaFI7OG"},
+  {title:"Worship Together",artist:"Various Artists",emoji:"✝️",bg:"linear-gradient(135deg,#1a0a2e,#2d1b4e)",apple:"https://music.apple.com",spotify:"https://open.spotify.com/playlist/37i9dQZF1DX2vYkey5YBaU"},
+  {title:"Bethel Music Collection",artist:"Bethel Church",emoji:"🕊️",bg:"linear-gradient(135deg,#0a2a1a,#1a4a2e)",apple:"https://music.apple.com",spotify:"https://open.spotify.com/artist/0cbKjFSB0M8qLhGxstIYeU"},
+  {title:"Maverick City Music",artist:"Maverick City",emoji:"🎶",bg:"linear-gradient(135deg,#2a1a0a,#4a3010)",apple:"https://music.apple.com",spotify:"https://open.spotify.com/artist/7tYKF4w9nC0nq9CsPZTHyP"},
+];
+const AUDIOBOOKS = [
+  {title:"Mere Christianity",author:"C.S. Lewis",asin:"B004X9YPKW"},
+  {title:"Wild at Heart",author:"J. Eldredge",asin:"B00AFVIKIK"},
+  {title:"Purpose Driven Life",author:"R. Warren",asin:"B002V5GMMA"},
+  {title:"Uninvited",author:"L. TerKeurst",asin:"B004TS1ZS2"},
+  {title:"The 5 Love Languages",author:"Gary Chapman",asin:"B001QUQE7I"},
+];
+
 function MediaTab({T}){
-  const [bf,setBf]=useState("all");
-  const [mf,setMf]=useState("all");
-  const fb=bf==="all"?BOOKS_MEDIA:BOOKS_MEDIA.filter(b=>b.genre===bf);
+  const [cat,setCat]=useState("books");
+  const CATS=[{id:"books",label:"📚 Books"},{id:"playlists",label:"🎵 Playlists"},{id:"podcasts",label:"🎙️ Podcasts"},{id:"audio",label:"🎧 Audiobooks"}];
   return(<div>
-    <SL T={T}>📚 Faith-Based Books</SL>
-    <div style={{display:"flex",gap:6,overflowX:"auto",paddingBottom:6,marginBottom:11}}>{["all","Men's","Women's","Couples","Leadership","Faith","Purpose"].map(f=><Pill key={f} T={T} small active={bf===(f==="all"?"all":f)} onClick={()=>setBf(f==="all"?"all":f)} style={{flexShrink:0}}>{f}</Pill>)}</div>
-    {fb.map(b=>(<GCard key={b.title} T={T} style={{display:"flex",alignItems:"center",gap:12,padding:"10px 14px",marginBottom:8}}><div style={{fontSize:26}}>{b.cover}</div><div style={{flex:1}}><div style={{fontSize:13,color:T.text,fontWeight:600,fontFamily:"sans-serif"}}>{b.title}</div><div style={{fontSize:11,color:T.textMuted,fontFamily:"sans-serif",marginTop:1}}>{b.author}</div></div><Badge color={T.gold}>{b.genre}</Badge></GCard>))}
-    <SL T={T} style={{marginTop:14}}>🎙️ Podcasts & Worship</SL>
-    <div style={{display:"flex",gap:6,overflowX:"auto",paddingBottom:6,marginBottom:11}}>{["all","podcast","music","audio"].map(f=><Pill key={f} T={T} small active={mf===f} onClick={()=>setMf(f)} style={{flexShrink:0,textTransform:"capitalize"}}>{f}</Pill>)}</div>
-    {PODCASTS.filter(p=>mf==="all"||p.type===mf).map(pod=>(<GCard key={pod.title} T={T} style={{display:"flex",alignItems:"center",gap:12,padding:"10px 14px",marginBottom:8}}><div style={{fontSize:22}}>{pod.icon}</div><div style={{flex:1}}><div style={{fontSize:13,color:T.text,fontWeight:600,fontFamily:"sans-serif"}}>{pod.title}</div><div style={{fontSize:11,color:T.textMuted,fontFamily:"sans-serif",marginTop:1}}>{pod.host}</div></div><BtnO T={T} style={{fontSize:10,padding:"4px 9px"}}>▶</BtnO></GCard>))}
-    <GCard T={T} style={{border:`1px solid ${T.earth}44`,padding:"13px 15px",marginTop:4}}><div style={{fontSize:13,color:T.earth,marginBottom:5,fontFamily:"sans-serif"}}>🕊️ Celebrate Recovery Resources</div><div style={{fontSize:11,color:T.textMuted,fontFamily:"sans-serif",marginBottom:10}}>CR audio messages, workbooks, and 12-step study materials for recovery ministry.</div><div style={{display:"flex",gap:8}}><BtnO T={T} style={{fontSize:10,borderColor:T.earth,color:T.earth}}>CR Podcasts</BtnO><BtnO T={T} style={{fontSize:10,borderColor:T.earth,color:T.earth}}>Workbooks</BtnO></div></GCard>
-    <GCard T={T} style={{border:`1px dashed ${T.borderGoldFaint}`,marginTop:4}}><div style={{fontSize:12,color:T.gold,marginBottom:3,fontFamily:"sans-serif",fontWeight:700}}>🚀 Phase 2 — Teen Groups</div><div style={{fontSize:11,color:T.textMuted,fontFamily:"sans-serif"}}>Coming soon: youth devotionals, teen ministry tools, and next-gen group resources.</div></GCard>
+    {/* Category tabs */}
+    <div style={{display:"flex",gap:6,overflowX:"auto",paddingBottom:6,marginBottom:14,scrollbarWidth:"none"}}>
+      {CATS.map(c=><Pill key={c.id} T={T} small active={cat===c.id} onClick={()=>setCat(c.id)} style={{flexShrink:0}}>{c.label}</Pill>)}
+    </div>
+
+    {/* BOOKS — vertical */}
+    {cat==="books"&&(<div>
+      <SL T={T}>Faith-Based Books</SL>
+      {BOOKS_VERTICAL.map(b=>(
+        <GCard key={b.title} T={T} style={{display:"flex",alignItems:"center",gap:12,padding:"11px 13px",marginBottom:8,cursor:"pointer"}} onClick={()=>window.open(`https://www.amazon.com/dp/${b.asin}?tag=nucleoapp-20`,"_blank")}>
+          <div style={{width:50,height:50,borderRadius:10,background:b.bg,display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0}}>{b.emoji}</div>
+          <div style={{flex:1}}>
+            <div style={{fontSize:13,color:T.text,fontWeight:600,fontFamily:"sans-serif",marginBottom:2}}>{b.title}</div>
+            <div style={{fontSize:10,color:T.textMuted,fontFamily:"sans-serif",marginBottom:6}}>{b.author} · {b.genre}</div>
+            <button onClick={e=>{e.stopPropagation();window.open(`https://www.amazon.com/dp/${b.asin}?tag=nucleoapp-20`,"_blank");}} style={{background:T.btnBg,color:T.btnTxt,border:"none",borderRadius:7,padding:"5px 12px",fontSize:10,fontWeight:700,cursor:"pointer",fontFamily:"sans-serif"}}>Amazon →</button>
+          </div>
+        </GCard>
+      ))}
+      <div style={{fontSize:9,color:T.textMuted,fontFamily:"sans-serif",textAlign:"center",marginBottom:4}}>Purchases support the Núcleo app · Amazon affiliate links</div>
+    </div>)}
+
+    {/* PLAYLISTS — vertical */}
+    {cat==="playlists"&&(<div>
+      <SL T={T}>Faith-Based Playlists</SL>
+      {PLAYLISTS.map(p=>(
+        <GCard key={p.title} T={T} style={{display:"flex",alignItems:"center",gap:13,padding:"12px 14px",marginBottom:8}}>
+          <div style={{width:50,height:50,borderRadius:10,background:p.bg,display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0}}>{p.emoji}</div>
+          <div style={{flex:1}}>
+            <div style={{fontSize:13,color:T.text,fontWeight:600,fontFamily:"sans-serif",marginBottom:2}}>{p.title}</div>
+            <div style={{fontSize:10,color:T.textMuted,fontFamily:"sans-serif",marginBottom:8}}>{p.artist}</div>
+            <div style={{display:"flex",gap:7}}>
+              <button onClick={()=>window.open(p.apple,"_blank")} style={{flex:1,background:"linear-gradient(135deg,#FC3C44,#FF2D55)",color:"#fff",border:"none",borderRadius:7,padding:"6px 4px",fontSize:10,fontWeight:700,cursor:"pointer",fontFamily:"sans-serif"}}>🍎 Apple</button>
+              <button onClick={()=>window.open(p.spotify,"_blank")} style={{flex:1,background:"#1DB954",color:"#000",border:"none",borderRadius:7,padding:"6px 4px",fontSize:10,fontWeight:700,cursor:"pointer",fontFamily:"sans-serif"}}>▶ Spotify</button>
+            </div>
+          </div>
+        </GCard>
+      ))}
+    </div>)}
+
+    {/* PODCASTS — vertical (unchanged structure) */}
+    {cat==="podcasts"&&(<div>
+      <SL T={T}>Faith-Based Podcasts</SL>
+      {PODCASTS.map(pod=>(
+        <GCard key={pod.title} T={T} style={{display:"flex",alignItems:"center",gap:12,padding:"10px 14px",marginBottom:8}}>
+          <div style={{fontSize:24}}>{pod.icon}</div>
+          <div style={{flex:1}}><div style={{fontSize:13,color:T.text,fontWeight:600,fontFamily:"sans-serif"}}>{pod.title}</div><div style={{fontSize:11,color:T.textMuted,fontFamily:"sans-serif",marginTop:1}}>{pod.host}</div></div>
+          <BtnO T={T} style={{fontSize:10,padding:"4px 9px"}}>▶</BtnO>
+        </GCard>
+      ))}
+    </div>)}
+
+    {/* AUDIOBOOKS — vertical */}
+    {cat==="audio"&&(<div>
+      <SL T={T}>Faith-Based Audiobooks</SL>
+      {AUDIOBOOKS.map(a=>(
+        <GCard key={a.title} T={T} style={{display:"flex",alignItems:"center",gap:12,padding:"11px 13px",marginBottom:8,cursor:"pointer"}} onClick={()=>window.open(`https://www.amazon.com/dp/${a.asin}?tag=nucleoapp-20`,"_blank")}>
+          <div style={{width:50,height:50,borderRadius:10,background:"linear-gradient(135deg,#2D4A3E,#1a3a2e)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0}}>🎧</div>
+          <div style={{flex:1}}>
+            <div style={{fontSize:13,color:T.text,fontWeight:600,fontFamily:"sans-serif",marginBottom:2}}>{a.title}</div>
+            <div style={{fontSize:10,color:T.textMuted,fontFamily:"sans-serif",marginBottom:6}}>{a.author} · Audible</div>
+            <button onClick={e=>{e.stopPropagation();window.open(`https://www.amazon.com/dp/${a.asin}?tag=nucleoapp-20`,"_blank");}} style={{background:T.btnBg,color:T.btnTxt,border:"none",borderRadius:7,padding:"5px 12px",fontSize:10,fontWeight:700,cursor:"pointer",fontFamily:"sans-serif"}}>Audible →</button>
+          </div>
+        </GCard>
+      ))}
+      <div style={{fontSize:9,color:T.textMuted,fontFamily:"sans-serif",textAlign:"center",marginBottom:4}}>Amazon Audible affiliate links · Supports the Núcleo app</div>
+    </div>)}
+
+    <GCard T={T} style={{border:`1px dashed ${T.borderGoldFaint}`,marginTop:4}}>
+      <div style={{fontSize:12,color:T.gold,marginBottom:3,fontFamily:"sans-serif",fontWeight:700}}>🚀 Phase 2 — Teen Groups</div>
+      <div style={{fontSize:11,color:T.textMuted,fontFamily:"sans-serif"}}>Coming soon: youth devotionals, teen ministry tools, and next-gen group resources.</div>
+    </GCard>
   </div>);
 }
 
